@@ -51,16 +51,9 @@ export const Route = createRootRoute({
       { property: "og:description", content: "Inventory with POS ." },
       { name: "twitter:description", content: "Inventory with POS ." },
       {
-        property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e8a7f7e2-c1d9-4897-8da8-92bc0e0ef917/id-preview-8da5ddac--6c188075-679a-4613-9d79-cb0bb887c96a.lovable.app-1778038494315.png",
+        name: "twitter:card",
+        content: "summary_large_image",
       },
-      {
-        name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e8a7f7e2-c1d9-4897-8da8-92bc0e0ef917/id-preview-8da5ddac--6c188075-679a-4613-9d79-cb0bb887c96a.lovable.app-1778038494315.png",
-      },
-      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],
     links: [
