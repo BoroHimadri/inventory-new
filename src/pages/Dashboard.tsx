@@ -1,8 +1,26 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useStore, actions, type Product, CATEGORIES } from "@/lib/store";
+import { toast } from "@/components/Toast";
 import {
-  ShoppingBag,
+  Search,
+  ShoppingBasket,
+  Minus,
+  Plus,
+  Trash2,
+  ArrowRight,
+  X,
+  Printer,
+  CheckCircle2,
+  LayoutDashboard,
   Package,
+  Users,
+  BarChart3,
+  Bell,
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+  UserCircle,
   TrendingUp,
   TrendingDown,
   AlertTriangle,
@@ -10,30 +28,19 @@ import {
   Wallet,
   Receipt,
   Boxes,
-  Users,
   AlertCircle,
   Ban,
   Clock,
   History,
-  Bell,
+  User,
+  Phone,
+  Pencil,
+  ShoppingBag,
 } from "lucide-react";
-import { useStore, type Product } from "@/lib/store";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Dashboard — Ira" },
-      {
-        name: "description",
-        content:
-          "Today's sales, inventory health and recent activity at a glance.",
-      },
-    ],
-  }),
-  component: DashboardPage,
-});
+import { useMemo, useState } from "react";
 
-function DashboardPage() {
+export default function DashboardPage() {
   const products = useStore((s) => s.products);
   const transactions = useStore((s) => s.transactions);
 
@@ -275,7 +282,6 @@ function AlertGroup({
 
   const Icon = type === "danger" ? Ban : AlertCircle;
   const colorCls = type === "danger" ? "text-danger" : "text-warn";
-  const bgCls = type === "danger" ? "bg-danger-soft" : "bg-warn-soft";
 
   return (
     <div className="py-2">
@@ -359,7 +365,7 @@ function Kpi({
         <div
           className={`flex h-10 w-10 items-center justify-center rounded-xl ${tintCls}`}
         >
-          <Icon className="h-[18px] w-[18px]" strokeWidth={1.8} />
+          <Icon className="h-4.5 w-4.5" strokeWidth={1.8} />
         </div>
       </div>
       <div className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">
@@ -382,7 +388,7 @@ function Kpi({
   if (to) {
     return (
       <Link
-        to={to as any}
+        to={to}
         className="group rounded-2xl border border-hairline bg-surface p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-pop"
       >
         {content}
@@ -410,7 +416,7 @@ function ActionCard({
 }) {
   return (
     <Link
-      to={to as any}
+      to={to}
       className="group flex items-center gap-4 rounded-2xl border border-hairline bg-surface p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-pop"
     >
       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-mist text-brand-deep transition-colors group-hover:bg-brand group-hover:text-white">
@@ -460,7 +466,7 @@ function Stat({
   return (
     <div className="flex items-center gap-4 px-6 py-5">
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-2 text-ink-soft">
-        <Icon className="h-[18px] w-[18px]" strokeWidth={1.8} />
+        <Icon className="h-4.5 w-4.5" strokeWidth={1.8} />
       </div>
       <div>
         <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">

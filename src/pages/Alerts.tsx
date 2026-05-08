@@ -1,32 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo } from "react";
-import {
-  AlertTriangle,
-  Ban,
-  AlertCircle,
-  Clock,
-  ArrowLeft,
-  Package,
-  Pencil,
-  type LucideIcon,
+import { Link } from "react-router-dom";
+import { useStore, actions, type Product, CATEGORIES } from "@/lib/store";
+import { toast } from "@/components/Toast";
+import { 
+  Search, ShoppingBasket, Minus, Plus, Trash2, ArrowRight, X, Printer, CheckCircle2, 
+  LayoutDashboard, Package, Users, BarChart3, Bell, Settings, LogOut, ChevronLeft, ChevronRight, 
+  UserCircle, TrendingUp, TrendingDown, AlertTriangle, ArrowUpRight, Wallet, Receipt, Boxes, 
+  AlertCircle, Ban, Clock, History, User, Phone, Pencil, ArrowLeft 
 } from "lucide-react";
-import { useStore, type Product } from "@/lib/store";
 
-export const Route = createFileRoute("/alerts")({
-  head: () => ({
-    meta: [
-      { title: "System Alerts — Ira" },
-      {
-        name: "description",
-        content:
-          "Detailed view of all inventory alerts: low stock, expired, and more.",
-      },
-    ],
-  }),
-  component: AlertsPage,
-});
+import { useMemo, useState } from "react";
 
-function AlertsPage() {
+export default function AlertsPage() {
   const products = useStore((s) => s.products);
 
   const alerts = useMemo(() => {
@@ -61,7 +45,6 @@ function AlertsPage() {
               to="/"
               className="mb-4 inline-flex items-center gap-1.5 text-[12px] font-semibold text-ink-soft hover:text-brand"
             >
-              {/* Wrap content in a fragment if TS is being stubborn */}
               <>
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>Back to Dashboard</span>
@@ -134,18 +117,18 @@ function AlertsPage() {
   );
 }
 
-function AlertSection({
+function AlertSection({ 
   title,
   description,
   items,
   type,
-  icon: Icon,
+  icon: Icon 
 }: {
   title: string;
   description: string;
   items: Product[];
   type: "danger" | "warn";
-  icon: LucideIcon;
+  icon: any;
 }) {
   if (items.length === 0) return null;
 

@@ -1,22 +1,45 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo } from "react";
-import { TrendingUp } from "lucide-react";
-import { useStore } from "@/lib/store";
+import { Link } from "react-router-dom";
+import { useMemo, useState } from "react";
+import {
+  TrendingUp,
+  TrendingDown,
+  LayoutDashboard,
+  ShoppingBag,
+  Package,
+  Users,
+  BarChart3,
+  Bell,
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+  UserCircle,
+  Search,
+  ShoppingBasket,
+  Minus,
+  Plus,
+  Trash2,
+  ArrowRight,
+  X,
+  Printer,
+  CheckCircle2,
+  AlertTriangle,
+  ArrowUpRight,
+  Wallet,
+  Receipt,
+  Boxes,
+  AlertCircle,
+  Ban,
+  Clock,
+  History,
+  User,
+  Phone,
+  Pencil,
+} from "lucide-react";
+import { useStore, actions, type Product, CATEGORIES } from "@/lib/store";
+import { toast } from "@/components/Toast";
 
-export const Route = createFileRoute("/reports")({
-  head: () => ({
-    meta: [
-      { title: "Reports — Ira" },
-      {
-        name: "description",
-        content: "Daily revenue, top sellers and recent transactions.",
-      },
-    ],
-  }),
-  component: ReportsPage,
-});
-
-function ReportsPage() {
+export default function ReportsPage() {
   const products = useStore((s) => s.products);
   const transactions = useStore((s) => s.transactions);
 
@@ -44,7 +67,7 @@ function ReportsPage() {
 
   return (
     <div className="h-full overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-6">
+      <div className="mx-auto flex max-w-350 flex-col gap-6">
         {/* KPIs */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
           <Kpi
@@ -96,7 +119,7 @@ function ReportsPage() {
         {/* Transactions */}
         <Card title="Recent Transactions" subtitle="Latest 8">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px]">
+            <table className="w-full min-w-160">
               <thead>
                 <tr className="border-b border-hairline bg-surface-2/60">
                   {[
@@ -160,7 +183,7 @@ function Kpi({
 }) {
   return (
     <div className="relative overflow-hidden rounded-lg border border-hairline bg-surface px-6 py-5">
-      <div className="absolute left-0 top-0 h-full w-[3px] bg-brand" />
+      <div className="absolute left-0 top-0 h-full w-0.75 bg-brand" />
       <div className="flex items-baseline justify-between">
         <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
           {label}

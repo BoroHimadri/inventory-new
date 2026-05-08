@@ -1,21 +1,41 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { Plus, Pencil, X } from "lucide-react";
-import { actions, type Product, useStore } from "@/lib/store";
+import {
+  Plus,
+  Pencil,
+  X,
+  Search,
+  ShoppingBasket,
+  Minus,
+  Trash2,
+  ArrowRight,
+  CheckCircle2,
+  LayoutDashboard,
+  Package,
+  Users,
+  BarChart3,
+  Bell,
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+  UserCircle,
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  ArrowUpRight,
+  Wallet,
+  Receipt,
+  Boxes,
+  AlertCircle,
+  Ban,
+  Clock,
+  History,
+  User,
+  Phone,
+} from "lucide-react";
+import { actions, type Product, useStore, CATEGORIES } from "@/lib/store";
 import { toast } from "@/components/Toast";
-
-export const Route = createFileRoute("/inventory")({
-  head: () => ({
-    meta: [
-      { title: "Inventory — Ira" },
-      {
-        name: "description",
-        content: "Track stock levels, costs and reorder points.",
-      },
-    ],
-  }),
-  component: InventoryPage,
-});
 
 const CATS = ["Fruits", "Vegetables", "Dairy", "Grains", "Beverages", "Snacks"];
 const UNITS = ["kg", "pcs", "liter", "dozen", "box"] as const;
@@ -35,7 +55,7 @@ const empty: FormState = {
   unit: "pcs",
 };
 
-function InventoryPage() {
+export default function InventoryPage() {
   const products = useStore((s) => s.products);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("");
@@ -122,7 +142,7 @@ function InventoryPage() {
       <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
         <div className="overflow-hidden rounded-lg border border-hairline bg-surface">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[960px]">
+            <table className="w-full min-w-240">
               <thead>
                 <tr className="border-b border-hairline bg-surface-2">
                   {[
@@ -262,7 +282,7 @@ function ProductModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[480px] max-w-[95vw] max-h-[92vh] overflow-y-auto rounded-xl border border-hairline bg-surface p-5 shadow-2xl sm:p-7"
+        className="w-120 max-w-[95vw] max-h-[92vh] overflow-y-auto rounded-xl border border-hairline bg-surface p-5 shadow-2xl sm:p-7"
       >
         <div className="mb-6 flex items-start justify-between">
           <div>
@@ -315,9 +335,7 @@ function ProductModal({
           <Field label="Unit">
             <select
               value={form.unit}
-              onChange={(e) =>
-                upd("unit", e.target.value as FormState["unit"])
-              }
+              onChange={(e) => upd("unit", e.target.value as FormState["unit"])}
               className={inputCls}
             >
               {UNITS.map((u) => (

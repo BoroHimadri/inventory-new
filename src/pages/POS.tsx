@@ -1,32 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import {
-  Search,
-  ShoppingBasket,
-  Minus,
-  Plus,
-  Trash2,
-  ArrowRight,
-  X,
-  Printer,
-  CheckCircle2,
-} from "lucide-react";
-import { actions, CATEGORIES, useStore, type Product } from "@/lib/store";
+import { Link } from "react-router-dom";
+import { useStore, actions, type Product, CATEGORIES } from "@/lib/store";
 import { toast } from "@/components/Toast";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { 
+  Search, ShoppingBasket, Minus, Plus, Trash2, ArrowRight, X, Printer, CheckCircle2, 
+  LayoutDashboard, Package, Users, BarChart3, Bell, Settings, LogOut, ChevronLeft, ChevronRight, 
+  UserCircle, TrendingUp, TrendingDown, AlertTriangle, ArrowUpRight, Wallet, Receipt, Boxes, 
+  AlertCircle, Ban, Clock, History, User, Phone, Pencil 
+} from "lucide-react";
 
-export const Route = createFileRoute("/pos")({
-  head: () => ({
-    meta: [
-      { title: "Point of Sale — Ira" },
-      {
-        name: "description",
-        content: "Run the till: browse products, build a sale, accept payment.",
-      },
-    ],
-  }),
-  component: POSPage,
-});
+import { useMemo, useState } from "react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const PAY_METHODS = [
   { id: "Cash", label: "Cash" },
@@ -47,7 +30,7 @@ type ReceiptData = {
   time: string;
 };
 
-function POSPage() {
+export default function POSPage() {
   const products = useStore((s) => s.products);
   const cart = useStore((s) => s.cart);
   const selectedPay = useStore((s) => s.selectedPay);

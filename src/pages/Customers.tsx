@@ -1,22 +1,46 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
+import { useStore, actions, type Product, CATEGORIES } from "@/lib/store";
+import { toast } from "@/components/Toast";
+import {
+  Search,
+  ShoppingBasket,
+  Minus,
+  Plus,
+  Trash2,
+  ArrowRight,
+  X,
+  Printer,
+  CheckCircle2,
+  LayoutDashboard,
+  Package,
+  Users,
+  BarChart3,
+  Bell,
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+  UserCircle,
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  ArrowUpRight,
+  Wallet,
+  Receipt,
+  Boxes,
+  AlertCircle,
+  Ban,
+  Clock,
+  History,
+  User,
+  Phone,
+  Pencil,
+  ShoppingBag,
+} from "lucide-react";
+
 import { useMemo, useState } from "react";
-import { Search, User, Phone, Receipt, ShoppingBag } from "lucide-react";
-import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/customers")({
-  head: () => ({
-    meta: [
-      { title: "Customers — Ira" },
-      {
-        name: "description",
-        content: "View customer details and their purchase history.",
-      },
-    ],
-  }),
-  component: CustomersPage,
-});
-
-function CustomersPage() {
+export default function CustomersPage() {
   const transactions = useStore((s) => s.transactions);
   const [query, setQuery] = useState("");
 
@@ -60,12 +84,16 @@ function CustomersPage() {
                 <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-surface-2 text-ink-faint">
                   <User className="h-8 w-8" />
                 </div>
-                <h2 className="font-display text-[18px] font-bold text-ink">No customer records found</h2>
-                <p className="mt-1 text-[14px] text-ink-soft">Try adjusting your search query</p>
+                <h2 className="font-display text-[18px] font-bold text-ink">
+                  No customer records found
+                </h2>
+                <p className="mt-1 text-[14px] text-ink-soft">
+                  Try adjusting your search query
+                </p>
               </div>
             ) : (
               filtered.map((t) => (
-                <div 
+                <div
                   key={t.inv}
                   className="overflow-hidden rounded-2xl border border-hairline bg-surface shadow-card transition-all hover:shadow-pop"
                 >
@@ -77,7 +105,9 @@ function CustomersPage() {
                           <User className="h-5 w-5" />
                         </div>
                         <div className="min-w-0">
-                          <div className="font-display font-bold text-ink truncate">{t.cust}</div>
+                          <div className="font-display font-bold text-ink truncate">
+                            {t.cust}
+                          </div>
                           <div className="flex items-center gap-1.5 text-[11px] text-ink-soft">
                             <Phone className="h-3 w-3" />
                             {t.custPhone || "N/A"}
@@ -90,7 +120,9 @@ function CustomersPage() {
                     <div className="p-5 flex flex-col justify-center">
                       <div className="flex items-center gap-2 mb-2">
                         <ShoppingBag className="h-4 w-4 text-brand" />
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-ink-soft">Items Purchased</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-ink-soft">
+                          Items Purchased
+                        </span>
                       </div>
                       <div className="text-[13px] text-ink-soft leading-relaxed">
                         {t.itemList}
@@ -108,8 +140,12 @@ function CustomersPage() {
 
                     {/* Payment Info */}
                     <div className="p-5 flex flex-col justify-center items-end bg-surface-2/30">
-                      <div className="text-[11px] font-bold uppercase tracking-wider text-ink-faint mb-1">Total Paid</div>
-                      <div className="font-display text-[22px] font-bold text-ink">₹{t.amount.toLocaleString("en-IN")}</div>
+                      <div className="text-[11px] font-bold uppercase tracking-wider text-ink-faint mb-1">
+                        Total Paid
+                      </div>
+                      <div className="font-display text-[22px] font-bold text-ink">
+                        ₹{t.amount.toLocaleString("en-IN")}
+                      </div>
                       <div className="mt-1 inline-flex items-center rounded-full bg-brand px-2.5 py-0.5 text-[10px] font-bold text-white uppercase tracking-wider">
                         {t.pay}
                       </div>
